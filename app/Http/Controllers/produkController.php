@@ -45,14 +45,21 @@ class ProdukController extends Controller
             // dd($request->all());
             $request->validate([
                 'nama' => 'required|max:255',
-                'gambar' => 'required|max:255',
+                'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // validasi file gambar
                 'harga' => 'required|numeric',
-
             ]);
 
-            Produk::create($request->all());
-
-            return redirect()->route('produks.index')->with('success', 'Produk created successfully.');
+            if ($request->hasFile('gambar')) {
+                $imageName = time().'.'.$request->gambar->extension();  
+                $request->gambar->move(public_path('assets/image'), $imageName);
+            }
+    
+            Produk::create([
+                        'nama' => $request->nama,
+                        'gambar' => $imageName,
+                        'harga' => $request->harga,
+                    ]);
+        return redirect()->route('produks.index')->with('success', 'Produk created successfully.');
         } catch (ValidationException $e) {
             dd($e);
             return redirect()->route('produks.create')->withErrors($e->validator)->withInput();
