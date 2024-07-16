@@ -25,7 +25,7 @@
         <div class="w-50">
             <h2 class="text-center mb-4">Tambah Produk</h2>
 
-            <form method="post" action="{{ route('produks.store') }}">
+            <form method="post" action="{{ route('produks.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="nama">Nama Produk:</label>
