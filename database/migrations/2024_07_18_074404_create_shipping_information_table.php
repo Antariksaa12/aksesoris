@@ -11,14 +11,14 @@ class CreateShippingInformationTable extends Migration
     {
         Schema::create('shipping_information', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cart_id');
+            $table->string('sessions_id');
             $table->string('fullname');
             $table->string('address');
             $table->string('postalcode');
             $table->string('phone');
             $table->timestamps();
 
-            $table->foreign('cart_id')->references('id')->on('cart')->onDelete('cascade');
+            $table->foreign('sessions_id')->references('id')->on('session')->onDelete('cascade');
         });
     }
 

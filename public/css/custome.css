@@ -293,15 +293,18 @@
         font-weight: 100;
     }
 
-    .card-text {
-        text-align:justify;
-    }
-
     .card-harga {
         padding-top: 10px;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 600;
         text-align:left;
+    }
+
+    .card-stock {
+        margin-top: -0px;
+        font-size: 15px;
+        text-align:left;
+        color:red;
     }
 
     .wow {
@@ -328,10 +331,11 @@
         border-radius: 4vh;
     }
 
+    img.e {
+        width: 280px;
+        height: 290px;
+    }
     .card-img-top {
-        max-width: 280px;
-        height: 340px;
-        max-height: 340px;
         margin: 30px auto;
         padding: 30px;
         background-color: #d3d3d3;
@@ -419,6 +423,11 @@
 
 
     .x {
+        width: 850px;
+        /* background-color: #fff; */
+    }
+
+    .y {
         width: 850px;
         /* background-color: #fff; */
     }

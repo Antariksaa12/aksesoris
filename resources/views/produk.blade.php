@@ -18,11 +18,12 @@
                 <div class="beet">
 
                     <div class="card">
-                        <img src="{{ asset('assets/image/' . $produk->gambar) }}" class="card-img-top" alt="{{ $produk->nama }}">
+                        <img src="{{ asset('assets/image/' . $produk->gambar) }}" class="card-img-top e" alt="{{ $produk->nama }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $produk->nama }}</h5>
+                            <p class="card-stock">Sisa {{ $produk->stock }}</p>
                             <!-- <p class="card-text">{{ $produk->deskripsi }}</p> -->
-                            <p class="card-harga">Rp{{ number_format($produk->harga, 0, ',', '.') }}</p>
+                            <p class="card-harga">Rp. {{ number_format($produk->harga, 0, ',', '.') }}</p>
                             <form action="{{ route('cart.add') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="produk_id" value="{{ $produk->id }}">

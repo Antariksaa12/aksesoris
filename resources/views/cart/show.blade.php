@@ -5,7 +5,7 @@
 @section('content')
 <main style="background-color: #f8f9fa;">
     <div class="container py-5">
-        <a href="{{route('produks.indexProduk')}}" class="btn btn-light pro" >See More Product</a>
+        <a href="{{route('produk')}}" class="btn btn-light pro" >See More Product</a>
         <h2 class="text-center mb-4" style="font-weight:bold; margin-top:-45px;">Your Cart</h2>
         <div class="row" style="margin-top:50px;">
             @if($cart_items->isEmpty())
@@ -13,7 +13,7 @@
                     <p class="text-center">Your cart is empty!</p>
                 </div>
             @else
-                <div class="col-4 ">
+                <div class="col-4">
                     <form action="{{ route('cart.checkout') }}" method="POST" class="identity">
                         @csrf
                         <h5 style="margin-top:10px;">Shipping Information</h5>
@@ -61,7 +61,7 @@
                                 <td class="nama">{{ $item->produk->nama }}</td>
                                 <td class="price">Rp. {{ number_format($item->produk->harga, 0, ',', '.') }}</td>
                                 <td>
-                                    <input type="number" name="qty" value="{{ $item->qty }}" min="1" class="form-control d-inline update-qty" style="width:80px; height:30px;padding-right:0px;" data-id="{{ $item->id }}" data-price="{{ $item->produk->harga }}">
+                                    <input type="number" name="qty" value="{{ $item->qty }}" min="1" max="{{ $item->produk->stock }}" class="form-control d-inline update-qty" style="width:80px; height:30px;padding-right:0px;" data-id="{{ $item->id }}" data-price="{{ $item->produk->harga }}">
                                 </td>
                                 <td class="total-price" id="total-{{ $item->id }}">Rp. {{ number_format($item->produk->harga * $item->qty, 0, ',', '.') }}</td>
                                 <td class="ect">
@@ -80,16 +80,6 @@
                                 <td id="grand-total">Rp. {{ number_format($total, 0, ',', '.') }}</td>
                                 <td></td>
                             </tr>
-                            <tr>
-                                <td colspan="4" class="pricefoot"><strong>Discount (30%) :</strong></td>
-                                <td id="discount-amount">Rp. {{ number_format($total * 0.3, 0, ',', '.') }}</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td colspan="4" class="pricefoot"><strong>Final Total :</strong></td>
-                                <td id="final-total">Rp. {{ number_format($total * 0.7, 0, ',', '.') }}</td>
-                                <td></td>
-                            </tr>
                         </tfoot>
                     </table>
                 </div>
@@ -102,9 +92,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const qtyInputs = document.querySelectorAll('.update-qty');
     const grandTotalElement = document.getElementById('grand-total');
-    const discountAmountElement = document.getElementById('discount-amount');
-    const finalTotalElement = document.getElementById('final-total');
-    const discountRate = 0.3; // 30%
 
     function calculateTotals() {
         let grandTotal = 0;
@@ -115,12 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             grandTotal += total;
         });
 
-        const discountAmount = grandTotal * discountRate;
-        const finalTotal = grandTotal - discountAmount;
-
         grandTotalElement.innerText = `Rp. ${grandTotal.toLocaleString('id-ID')}`;
-        discountAmountElement.innerText = `Rp. ${discountAmount.toLocaleString('id-ID')}`;
-        finalTotalElement.innerText = `Rp. ${finalTotal.toLocaleString('id-ID')}`;
     }
 
     qtyInputs.forEach(input => {
@@ -128,6 +110,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const id = this.dataset.id;
             const price = parseFloat(this.dataset.price);
             const qty = parseInt(this.value);
+            const maxStock = parseInt(this.getAttribute('max')); // Ambil nilai max (stock)
+            
+            if (qty > maxStock) {
+                alert(`Stock hanya tersedia ${maxStock} unit.`);
+                this.value = maxStock; // Set nilai qty ke max stock
+                return;
+            }
+
             const totalPriceElement = document.getElementById(`total-${id}`);
             const totalPrice = price * qty;
             totalPriceElement.innerText = `Rp. ${totalPrice.toLocaleString('id-ID')}`;
@@ -155,5 +145,4 @@ document.addEventListener('DOMContentLoaded', function() {
     calculateTotals(); // Initial calculation on page load
 });
 </script>
-
 @endsection

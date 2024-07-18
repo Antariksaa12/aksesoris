@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Produk;
+use App\Models\Purchase;
 use App\Models\ShippingInformation;
+use App\Http\Controllers\Controller; 
 
 class CartController extends Controller
 {
@@ -91,8 +93,9 @@ class CartController extends Controller
             return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
         }
 
+        // Create shipping information
         $shippingInfo = ShippingInformation::create([
-            'cart_id' => $cartItems->first()->id, // get session ID
+            'sessions_id' => $sessionId,
             'fullname' => $validatedData['fullname'],
             'address' => $validatedData['address'],
             'postalcode' => $validatedData['postalcode'],
@@ -107,8 +110,6 @@ class CartController extends Controller
             'shippingInfo' => $shippingInfo,
             'cartItems' => $cartItems,
             'total' => $total,
-            'discount' => $total * 0.3,
-            'finalTotal' => $total * 0.7,
         ]);
     }
 
@@ -121,15 +122,19 @@ class CartController extends Controller
             return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
         }
 
+        // Ambil informasi pengiriman terkait dengan session ID saat ini
+        $shippingInfo = ShippingInformation::where('sessions_id', $sessionId)->first();
+
+        // Hitung total harga dari item di keranjang
         $total = $cartItems->sum(function($item) {
             return $item->produk->harga * $item->qty;
         });
 
+
         return view('cart.checkout', [
+            'shippingInfo' => $shippingInfo, // Kirim $shippingInfo ke view
             'cartItems' => $cartItems,
             'total' => $total,
-            'discount' => $total * 0.3,
-            'finalTotal' => $total * 0.7,
         ]);
     }
 }

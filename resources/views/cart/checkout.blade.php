@@ -8,66 +8,75 @@
         <h2 class="text-center mb-4" style="font-weight:bold">Checkout</h2>
         <div class="row" style="margin-top:50px;">
             <div class="col-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Shipping Information</h5>
-                    </div>
-                    <div class="card-body">
-                        <p><strong>Full Name:</strong> {{ $shippingInfo->fullname }}</p>
-                        <p><strong>Address:</strong> {{ $shippingInfo->address }}</p>
-                        <p><strong>Postal Code:</strong> {{ $shippingInfo->postalcode }}</p>
-                        <p><strong>Phone Number:</strong> {{ $shippingInfo->phone }}</p>
-                    </div>
-                </div>
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th colspan="3" class="text-center" style="padding:15px;background-color:#FFBF00;color:#000;">Shipping Information</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align:left;"><strong>Full Name:</strong></td>
+                            <td style="text-align:left;"><strong>:</strong></td>
+                            <td style="text-align:left;">{{ $shippingInfo->fullname }}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;"><strong>Address:</strong></td>
+                            <td style="text-align:left;"><strong>:</strong></td>
+                            <td style="text-align:left;">{{ $shippingInfo->address }}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;"><strong>Postal Code:</strong></td>
+                            <td style="text-align:left;"><strong>:</strong></td>
+                            <td style="text-align:left;">{{ $shippingInfo->postalcode }}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left;"><strong>Phone Number:</strong></td>
+                            <td style="text-align:left;"><strong>:</strong></td>
+                            <td style="text-align:left;">{{ $shippingInfo->phone }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="col-8">
-                <div class="card">
-                    <div class="card-header x">
-                        <h5>Order Summary</h5>
-                    </div>
-                    <div class="card-body x">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($cartItems as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->produk->nama }}</td>
-                                    <td>Rp. {{ number_format($item->produk->harga, 0, ',', '.') }}</td>
-                                    <td>{{ $item->qty }}</td>
-                                    <td>Rp. {{ number_format($item->produk->harga * $item->qty, 0, ',', '.') }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="4"><strong>Total :</strong></td>
-                                    <td  style="font-weight:bold;">Rp. {{ number_format($total, 0, ',', '.') }}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4"><strong>Discount (30%) :</strong></td>
-                                    <td style="font-weight:bold;">Rp. {{ number_format($total * 0.3, 0, ',', '.') }}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4"><strong>Final Total :</strong></td>
-                                    <td style="font-weight:bold;">Rp. {{ number_format($total * 0.7, 0, ',', '.') }}</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                        <div class="text-right">
-                            <button class="btn btn-primary">Purchase</button>
-                        </div>
-                    </div>
-                </div>
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th colspan="5" class="text-center" style="padding:15px;background-color:#FFBF00;color:#000;">Order Summary</th>
+                        </tr>
+                        <tr>
+                            <th>No</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($cartItems as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td style="text-align:left;">{{ $item->produk->nama }}</td>
+                            <td style="text-align:right;">Rp. {{ number_format($item->produk->harga, 0, ',', '.') }}</td>
+                            <td>{{ $item->qty }}</td>
+                            <td style="text-align:right;">Rp. {{ number_format($item->produk->harga * $item->qty, 0, ',', '.') }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4"><strong>Total :</strong></td>
+                            <td style="font-weight:bold; text-align:right;">Rp. {{ number_format($total, 0, ',', '.') }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
+            <form action="{{ route('purchase.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="shippingInfoId" value="{{ $shippingInfo->id }}">
+                <input type="hidden" name="cartItems" value="{{ json_encode($cartItems) }}">
+                <button type="submit" class="btn btn-warning" style="font-weight:bold;padding:15px;margin-top:20px;">Purchase Order</button>
+            </form>
         </div>
     </div>
 </main>

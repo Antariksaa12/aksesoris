@@ -79,6 +79,15 @@
             background-color: #3e8e41;
         }
 
+        a .btn {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
         .links {
             margin-top: 20px;
             text-align: center;
@@ -116,6 +125,7 @@
                     </label>
                 </div>
                 <button type="submit">Login</button>
+                <a href="{{route('welcome')}}" class="btn btn-success">Back</a>
             </form>
             <div class="links" style="display:block">
                 <a href="#">Forgot password?</a>
