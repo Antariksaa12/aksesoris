@@ -1,63 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="preconect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts/googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.min.js"
-        integrity="sha512-XKa9Hemdy1Ui3KSGgJdgMyYlUg1gM+QhL6cnlyTe2qzMCYm4nAZ1PsVerQzTTXzonUR+dmswHqgJPuwCq1MaAg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="{{asset('css/custome.css')}}">
-    <title>HAPTYCRAFT</title>
-    <script src="https://kit.fontawesome.com/ba558f5520.js" crossorigin="anonymous"></script>
-
-<body>
-    <header>
-        <nav class="navbar navbar-dark navbar-expand-lg" style="background-color: #365E32;">
-            <div class="container">
-                <a class="navbar-brand fs-6" href="#" style="font-weight:bold;">HAPTYCRAFT</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end gap-4" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link fs-8 active" aria-current="page" href="#home"
-                                style="font-weight:bold">Home</a>
-                        </li>
-                        <li class="kategori">
-                            <a class="nav-link fs-8 active" aria-current="page" href="#categories"
-                                style="font-weight:bold">Product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fs-8" href="#contact" style="font-weight:bold">Contact Us</a>
-                        </li>
-                    </ul>
-                    <div class="d-flex align-items-center justify-content-around">
-                        <button class="btn btn-outline-dark" type="submit"
-                            style="background-color: #FFBF00; font-weight:bold">
-                            <a href="{{route('login')}}">
-                                Login
-                            </a>
-                        </button>
-                        <div class="notif">
-                            <a href="{{route("keranjang")}}" class="fs-5">
-                                <i class="fa-solid icon-nav fa-bag-shopping ms-3 "></i>
-                            </a>
-                        </div>
-                        </d>
-                    </div>
-                </div>
-        </nav>
-    </header>
-    <main style="background-color: #365E32; width:100%">
+@extends('layouts.app')
+@section('title', 'Welcome')
+@section('content')
         <div class="Home" id="home" style="min-height:100vh; display: flex; align-items:center">
             <img src="{{asset('assets/image/awal.jpg')}}" alt="Product Image"
                 style="width: 400px; border-radius: 3vh; margin-left: 80px;">
@@ -66,7 +9,7 @@
                     <h1 style="font-weight: bold; font-size:50px;">Accessories <br> that make you feel <br> confident
                         and beautiful!</h1>
                 </div>
-                <p>Mari kita warnai hidup kita dengan cerita unik dan kenangan indah, dan
+                <p style="font-family:Poppins;margin-top:40px;">Mari kita warnai hidup kita dengan cerita unik dan kenangan indah, dan
                     biarkan Haptycraft menjadi mitra setia dalam perjalanan menuju kebahagiaan yang tak terlupakan.
                     Setiap langkah yang kita ambil adalah lembaran baru dalam buku kehidupan, di mana setiap halaman
                     diberi warna ceria oleh pengalaman-pengalaman yang kita bagi bersama. Dari jalan-jalan yang kita
@@ -78,24 +21,26 @@
                     warna dan kegembiraan. Bersama, mari kita terus menulis kisah-kisah baru yang menginspirasi dan
                     meninggalkan jejak kebahagiaan bagi kita dan orang-orang terkasih di sekitar kita.
                 </p>
-                <div class="klikan">
+                <div class="klikan" style="margin-top:50px;">
                     <button class="btn-indx1"><a href="#categories"
-                            style="color: black; font-size:20px; font-weight:bold">Catalog</a></button>
+                            style="color: black; font-size:20px; font-weight:bold; text-decoration:none;">Catalog</a></button>
                     <button class="btn-indx2"><a href="#contact"
-                            style="color: black; font-size:20px; font-weight:bold">Contact
+                            style="color: black; font-size:20px; font-weight:bold; text-decoration:none;">Contact
                             Us</a></button>
                 </div>
             </div>
         </div>
+
+        <!-- Product Section -->
         <div class="Categories" id="categories" style="min-height:100vh">
             <div class="isianka">
                 <div class="judul1">
-                    <h2 style="margin-left: 50px; font-size:40px; font-weight:bold">Our Collection</h2>
-                    <h3 style="margin-left: 50px; font-size:25px; font-weight:bold">
+                    <h2 style="margin-left: 50px; font-size:40px; font-weight:bold; margin-top:-50px;">Our Collection</h2>
+                    <h3 style="margin-left: 50px; font-size:25px; font-weight:bold; margin-top:20px;">
                         Mencari perhiasan yang indah dan berkualitas tinggi tanpa menguras kantong?
                     </h3>
                 </div>
-                <p style="margin-left: 50px;">Haptycraft adalah jawabannya! Kami menawarkan berbagai macam perhiasan
+                <p style="margin-left: 50px;font-family:Poppins;">Haptycraft adalah jawabannya! Kami menawarkan berbagai macam perhiasan
                     yang dibuat dengan bahan-bahan
                     terbaik dan pengerjaan yang halus, dengan harga yang terjangkau untuk semua orang. Setiap piece dari
                     koleksi kami tidak hanya mewakili keindahan dalam desainnya, tetapi juga sebuah cerita tentang
@@ -107,7 +52,7 @@
                     kenakan. Bersama kami, mari temukan perhiasan yang mencerminkan kepribadian Anda dan mengabadikan
                     kenangan berharga dalam gaya yang tak terlupakan.</p>
             </div>
-            <div class="container2" id="categories" style="align-items:center">
+            <div class="container2" id="categories" style="align-items:center margin-top:20px;">
                 <div class="bracelet1">
                     <img src="{{asset('assets/image/g1.png')}}" alt="Bracelet" class="bracelet-image"
                         style="width: 55%; margin-left:50px">
@@ -157,6 +102,8 @@
                     style="margin-left: 50px; font-size:23px; font-weight:bold">Lihat Lebih Banyak >></a>
             </button>
         </div>
+
+         <!-- Contact Us Section -->
         <div class="Contact-Us" id="contact" style="min-height:100vh">
             <h1 class="contact-title" style="text-align:left; font-size:40px; font-weight:bold">Contact US</h1>
             <div class="isi3">
@@ -198,27 +145,4 @@
                 </div>
             </section>
         </div>
-    </main>
-</body>
-<footer style="background-color: #FFBF00; padding: 10px">
-    <p style="text-align:center; color:white">&copy; 2024 Haptycraft. All right reserved.</p>
-    <div class="info">
-        <p><span>Info:</span> antariksaa12@gmail.com</p>
-        <p><span>Phone:</span> 082119154532</p>
-        <p><span>Address:</span> Subang</p>
-        <p><span>Hours:</span> 09:00-18:00</p>
-    </div>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-    crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-
-</html>
+        @endsection

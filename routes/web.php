@@ -1,31 +1,9 @@
 <?php
 
 use App\Http\Controllers\produkController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('home');
-
-// Route::get('/login', function () {
-//     return view('login');
-// })->name('login');
-
-
-
 
 
 Route::get('/', [AuthController::class, 'createAdmin']);
@@ -42,13 +20,15 @@ Route::get('/welcome', function () {
 })->name('welcome');
 
 Route::group(['middleware' => 'auth'], function () {
-    // Route::get('/produk', function () {
-    //     return view('produk');
-    // })->name('produk');
-    Route::get('/keranjang', function () {
-        return view('keranjang');
-    })->name('keranjang');
-
+    // Keranjang
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add')->middleware('flash');
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::put('/cart/update/{id}', [CartController::class, 'updateCart'])->name('cart.update');
+    Route::delete('/cart/delete/{id}', [CartController::class, 'deleteCart'])->name('cart.delete');
+    Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+    Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::get('/cart/count', [CartController::class, 'count'])->name('cart.count');
+    // Produk
     Route::get('/produk', [produkController::class, 'indexProduk'])->name('produks.indexProduk');
     Route::get('/produks', [produkController::class, 'index'])->name('produks.index');
     Route::get('/produks/create', [produkController::class, 'create'])->name('produks.create');

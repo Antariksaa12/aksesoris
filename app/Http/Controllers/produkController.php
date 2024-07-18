@@ -27,10 +27,7 @@ class ProdukController extends Controller
     public function indexProduk(Request $request)
     {
         $query = Produk::query();
-
-
         $produks = $query->get();
-
         return view('produk', compact('produks'));
     }
 
@@ -47,6 +44,7 @@ class ProdukController extends Controller
                 'nama' => 'required|max:255',
                 'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // validasi file gambar
                 'harga' => 'required|numeric',
+                'stock' => 'required|numeric'
             ]);
 
             if ($request->hasFile('gambar')) {

@@ -37,7 +37,7 @@
                         <button class="btn btn-outline-dark" type="submit"
                             style="background-color: #FFBF00; font-weight:bold">User</button>
                         <div class="notif">
-                            <a href="{{route('keranjang')}}" class="fs-5">
+                            <a href="{{route('view.cart')}}" class="fs-5">
                                 <i class="fa-solid icon-nav fa-bag-shopping ms-3 "></i>
                             </a>
                         </div>
