@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produk;
-use App\Models\Supplier;
-use Illuminate\Validation\ValidationException;
 
 class ProdukController extends Controller
 {
