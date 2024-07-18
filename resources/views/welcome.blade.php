@@ -98,7 +98,7 @@
                 </div>
             </div>
             <button class="lebih">
-                <a href="{{route('produks.indexProduk')}}" class="more-link"
+                <a href="{{route('produk')}}" class="more-link"
                     style="margin-left: 50px; font-size:23px; font-weight:bold">Lihat Lebih Banyak >></a>
             </button>
         </div>
@@ -114,35 +114,36 @@
                     menyampaikan pesan. Setiap pesan yang Anda kirimkan sangat berarti bagi kami dan akan kami tanggapi
                     secepat mungkin. Terima kasih telah menghubungi Haptycraft!</p>
             </div>
+    
             <section id="contact">
                 <div class="contact-detail">
-                    <form action="">
+                    <form action="{{ route('store') }}" method="POST">
+                        @csrf
                         <h1>Tell us your problem</h1>
                         <div class="form-group">
                             <div id="input-name" class="input-group">
-                                <p><label for="name">Name</label></p>
-                                <input type="text" id="name">
-                            </div>
-                            <div id="input-subject" class="input-group">
-                                <p><label for="subject">Subject</label></p>
-                                <input type="text" id="subject">
+                                <p><label for="fullname">Name</label></p>
+                                <input type="text" id="fullname" name="fullname" value="{{ old('fullname') }}" required>
+                                @error('fullname') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div id="input-email" class="input-group">
                                 <p><label for="email">Email</label></p>
-                                <input type="email" id="email">
-                            </div>
-                            <div id="input-phone" class="input-group">
-                                <p><label for="phone">Phone Number</label></p>
-                                <input type="tel" id="phone">
+                                <input type="email" id="email" name="email" value="{{ old('email') }}" required>
+                                @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div id="input-message" class="input-group">
-                                <p><label for="message">Message</label></p>
-                                <input type="text" id="message">
+                                <p><label for="feedback">Message</label></p>
+                                <input type="text" id="feedback" name="feedback" value="{{ old('feedback') }}" required>
+                                @error('feedback') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                        <button class="btn-submit">Submit</button>
+                        <button type="submit" class="btn-submit">Submit</button>
                     </form>
                 </div>
-            </section>
-        </div>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                </div>
         @endsection

@@ -61,12 +61,12 @@
 
     <footer style="background-color: #365E32; padding: 10px;">
         <p style="text-align: center; color: white;">&copy; 2024 Haptycraft. All rights reserved.</p>
-        <div class="info">
+        <!-- <div class="info">
             <p><span>Info:</span> antariksaa12@gmail.com</p>
             <p><span>Phone:</span> 082119154532</p>
             <p><span>Address:</span> Subang</p>
             <p><span>Hours:</span> 09:00-18:00</p>
-        </div>
+        </div> -->
     </footer>
 
 

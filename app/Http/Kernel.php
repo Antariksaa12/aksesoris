@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         // ...
         'flash' => \App\Http\Middleware\FlashMessage::class,
+        'is_admin' => \App\Http\Middleware\IsAdmin::class,
     ];
 
 }
