@@ -350,4 +350,76 @@
         color: #fff;
     }
 
+    th {
+        text-align: center;
+    }
 
+    tr  {
+        text-align: center;
+    }
+
+    tr .nama {
+        text-align: left;
+    }
+
+    tr .act {
+        text-align: left;
+    }
+
+    tr .total-price  {
+        text-align: right;
+    }
+
+    tr .price {
+        text-align: right;
+    }
+
+    tr #grand-total {
+        text-align: right;
+    }
+
+    tr #discount-amount {
+        text-align: right;
+    }
+
+    tr #final-total {
+        text-align: right;
+    }
+
+    .identity {
+        background-color: #ebeced;
+        padding-left: 20px;
+        padding-bottom: 25px;
+        padding-top: 10px;
+        border-radius: 2dvh;
+    }
+
+    .tbl {
+        border-radius: 2dvh;
+
+    }
+
+    .pro {
+        background-color: #ebeced;
+        
+        /* font-style: italic; */
+        font-size: 14px;
+        /* font-family: Poppins; */
+        border:#0d0d0d;
+    }
+
+    .pro:hover {
+        background-color: #fff;
+    }
+
+    .chck {
+        background-color: #365E32;
+        border:none;
+    }
+
+
+    .x {
+        width: 850px;
+        /* background-color: #fff; */
+    }
+    

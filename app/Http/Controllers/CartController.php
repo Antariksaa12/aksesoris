@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Produk;
+use App\Models\ShippingInformation;
 
 class CartController extends Controller
 {
@@ -64,6 +65,7 @@ class CartController extends Controller
         return redirect()->route('cart.show');
     }
 
+    // Notification
     public function count()
     {
         $cart_count = Cart::where('session_id', session()->getId())->count();
@@ -72,11 +74,63 @@ class CartController extends Controller
         return response()->json(['count' => $cart_count]);
     }
 
-
-    public function checkout()
+    // Checkout
+    public function checkout(Request $request)
     {
-        // Logika untuk proses checkout
-        return view('cart.checkout');
+        $validatedData = $request->validate([
+            'fullname' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'postalcode' => 'required|string|max:10',
+            'phone' => 'required|string|max:15',
+        ]);
+
+        $sessionId = session()->getId();
+        $cartItems = Cart::where('session_id', $sessionId)->get();
+
+        if ($cartItems->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
+        }
+
+        $shippingInfo = ShippingInformation::create([
+            'cart_id' => $cartItems->first()->id, // get session ID
+            'fullname' => $validatedData['fullname'],
+            'address' => $validatedData['address'],
+            'postalcode' => $validatedData['postalcode'],
+            'phone' => $validatedData['phone'],
+        ]);
+
+        $total = $cartItems->sum(function($item) {
+            return $item->produk->harga * $item->qty;
+        });
+
+        return view('cart.checkout', [
+            'shippingInfo' => $shippingInfo,
+            'cartItems' => $cartItems,
+            'total' => $total,
+            'discount' => $total * 0.3,
+            'finalTotal' => $total * 0.7,
+        ]);
+    }
+
+    public function showCheckout()
+    {
+        $sessionId = session()->getId();
+        $cartItems = Cart::where('session_id', $sessionId)->get();
+
+        if ($cartItems->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
+        }
+
+        $total = $cartItems->sum(function($item) {
+            return $item->produk->harga * $item->qty;
+        });
+
+        return view('cart.checkout', [
+            'cartItems' => $cartItems,
+            'total' => $total,
+            'discount' => $total * 0.3,
+            'finalTotal' => $total * 0.7,
+        ]);
     }
 }
 
