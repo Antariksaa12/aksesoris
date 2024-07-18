@@ -5,15 +5,45 @@
 @section('content')
 <main style="background-color: #f8f9fa;">
     <div class="container py-5">
-        <h2 class="text-center mb-4" style="font-weight:bold">Your Cart</h2>
-        <div class="row">
+        <a href="{{route('produks.indexProduk')}}" class="btn btn-light pro" >See More Product</a>
+        <h2 class="text-center mb-4" style="font-weight:bold; margin-top:-45px;">Your Cart</h2>
+        <div class="row" style="margin-top:50px;">
             @if($cart_items->isEmpty())
                 <div class="col-12">
                     <p class="text-center">Your cart is empty!</p>
                 </div>
             @else
-                <div class="col-12">
-                    <table class="table table-bordered">
+                <div class="col-4 ">
+                    <form action="{{ route('cart.checkout') }}" method="POST" class="identity">
+                        @csrf
+                        <h5 style="margin-top:10px;">Shipping Information</h5>
+                        <div class="form-row">
+                            <div class="form-group col-md-11">
+                                <label for="fullname">Full Name</label>
+                                <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Fullname" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-11" style="margin-top:10px;">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6" style="margin-top:10px;">
+                                <label for="postalcode">Postal Code</label>
+                                <input type="text" class="form-control" id="postalcode" name="postalcode" placeholder="4125.." required>
+                            </div>
+                            <div class="form-group col-md-6" style="margin-top:10px;">
+                                <label for="phone">Phone Number</label>
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="0815551..." required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn chck btn-success" style="margin-top:20px;">Checkout</button>
+                    </form>
+                </div>
+                
+                <!-- Cart Items -->
+                <div class="col-8">
+                    <table class="table table-bordered tbl">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -21,24 +51,24 @@
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Total Price</th>
-                                <th>Actions</th>
+                                <th>Act</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($cart_items as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->produk->nama }}</td>
-                                <td>Rp. {{ number_format($item->produk->harga, 0, ',', '.') }}</td>
+                                <td class="nama">{{ $item->produk->nama }}</td>
+                                <td class="price">Rp. {{ number_format($item->produk->harga, 0, ',', '.') }}</td>
                                 <td>
-                                    <input type="number" name="qty" value="{{ $item->qty }}" min="1" class="form-control d-inline w-auto update-qty" data-id="{{ $item->id }}" data-price="{{ $item->produk->harga }}">
+                                    <input type="number" name="qty" value="{{ $item->qty }}" min="1" class="form-control d-inline update-qty" style="width:80px; height:30px;padding-right:0px;" data-id="{{ $item->id }}" data-price="{{ $item->produk->harga }}">
                                 </td>
                                 <td class="total-price" id="total-{{ $item->id }}">Rp. {{ number_format($item->produk->harga * $item->qty, 0, ',', '.') }}</td>
-                                <td>
+                                <td class="ect">
                                     <form action="{{ route('cart.delete', $item->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        <button type="submit" class="fa fa-trash-o del" style="border:none; color:red;"></button>
                                     </form>
                                 </td>
                             </tr>
@@ -62,10 +92,6 @@
                             </tr>
                         </tfoot>
                     </table>
-                    <div class="text-right">
-                        <a href="{{ route('produks.indexProduk') }}" class="btn btn-primary">Product</a>
-                        <a href="{{ route('cart.checkout') }}" class="btn btn-success">Checkout</a>
-                    </div>
                 </div>
             @endif
         </div>
