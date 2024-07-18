@@ -18,7 +18,7 @@ class CreateShippingInformationTable extends Migration
             $table->string('phone');
             $table->timestamps();
 
-            $table->foreign('sessions_id')->references('id')->on('session')->onDelete('cascade');
+            $table->foreign('sessions_id')->references('id')->on('sessions')->onDelete('cascade');
         });
     }
 
