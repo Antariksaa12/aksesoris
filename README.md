@@ -7,19 +7,99 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## How to Install Repo on Your Local
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 1. Clone the Git Repository
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Open your terminal or command prompt.
+- Navigate to your desired project directory.
+- Use the git clone command to clone the repository.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Type this to you vscode searchbar
+
+```
+git clone https://github.com/<username>/<repo>.git 
+```
+
+## 2. Composer Install
+
+- Laravel uses Composer for PHP dependency management.
+- Navigate to your project folder.
+- Run composer install to install PHP dependencies.
+
+Modify your .env file
+
+```
+composer install
+```
+
+## 3. Set-uo .env File
+
+- Duplicate the .env.example file and rename it to .env.
+- Open the .env file and set your database connection details.
+
+Type on you terminal
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_database_username
+DB_PASSWORD=your_database_password
+```
+
+
+## 4. Generate an Application Key
+
+Type on you terminal
+
+```
+php artisan key:generate
+```
+
+
+## 5. Running Migration Tables
+
+Type on you terminal
+
+```
+php artisan migrate
+```
+
+
+## 6. Seed the Database (Optional)
+
+- If your project has seeders, use them to populate the database with sample data.
+
+Type on you terminal
+
+```
+php artisan db:seed
+```
+
+
+## 7. Link the storage
+
+- If your project has filemanager.
+
+Type on you terminal
+
+```
+php artisan storage:link
+```
+
+
+## 8. Start the development server
+
+- Use Artisan or XAMPP to start the Laravel development server.
+
+Type on you terminal
+
+```
+php artisan serve
+```
+
 
 ## Learning Laravel
 
