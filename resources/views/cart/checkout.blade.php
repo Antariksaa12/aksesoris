@@ -71,11 +71,11 @@
                     </tfoot>
                 </table>
             </div>
-            <form action="{{ route('purchase.store') }}" method="POST">
+            <form action="{{ route('purchase.store') }}" method="POST" class=" text-center">
                 @csrf
                 <input type="hidden" name="shippingInfoId" value="{{ $shippingInfo->id }}">
                 <input type="hidden" name="cartItems" value="{{ json_encode($cartItems) }}">
-                <button type="submit" class="btn btn-warning" style="font-weight:bold;padding:15px;margin-top:20px;">Purchase Order</button>
+                <button type="submit" class="btn btn-warning" style="font-weight:bold;padding:15px;width:1300px;;margin-top:20px;">Purchase Your Order</button>
             </form>
         </div>
     </div>
