@@ -11,11 +11,11 @@
 
 ## 1. Clone the Git Repository
 
-- Open your terminal or command prompt.
-- Navigate to your desired project directory.
-- Use the git clone command to clone the repository.
+- Open your vscode app.
+- type git clone https://github.com/<username>/<repo>.git in your search bar.
+- select desire folder or to your htdocs folder in xampp.
 
-Type this to you vscode searchbar
+Type this on your vscode searchbar
 
 ```
 git clone https://github.com/<username>/<repo>.git 
@@ -24,16 +24,16 @@ git clone https://github.com/<username>/<repo>.git
 ## 2. Composer Install
 
 - Laravel uses Composer for PHP dependency management.
-- Navigate to your project folder.
+- Open terminal on your vscode.
 - Run composer install to install PHP dependencies.
 
-Modify your .env file
+Type on your terminal
 
 ```
 composer install
 ```
 
-## 3. Set-uo .env File
+## 3. Set-up.env File
 
 - Duplicate the .env.example file and rename it to .env.
 - Open the .env file and set your database connection details.
@@ -72,7 +72,7 @@ php artisan migrate
 
 - If your project has seeders, use them to populate the database with sample data.
 
-Type on you terminal
+Type on your terminal
 
 ```
 php artisan db:seed
@@ -83,7 +83,7 @@ php artisan db:seed
 
 - If your project has filemanager.
 
-Type on you terminal
+Type on your terminal
 
 ```
 php artisan storage:link
