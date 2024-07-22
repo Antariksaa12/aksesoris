@@ -7,12 +7,12 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## How to Install Repo on Your Local
+## How to Install git Repo to Your Local Server
 
 ## 1. Clone the Git Repository
 
 - Open your vscode app.
-- type git clone https://github.com/<username>/<repo>.git in your search bar.
+- copy paste the code bellow on your search bar.
 - select desire folder or to your htdocs folder in xampp.
 
 Type this on your vscode searchbar
